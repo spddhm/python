@@ -61,6 +61,27 @@ from datetime import datetime
 filename = 'Beijing_2014.csv'
 with open(filename, 'r', encoding='UTF-8') as f:
     reader = csv.reader(f)
+    header_row = next(reader)
+
+    dates, highs = [], []
+    for row in reader:
+        rowDate = datetime.strptime(row[0], '%Y-%m-%d')
+        dates.append(rowDate)
+        highs.append(int(row[1]))
+        print(rowDate)
+
+    print(dates)
+
+    fig = plt.figure(dpi=128, figsize=(10, 6))
+    plt.plot(dates, highs, c='red')
+
+    plt.title("Temperature(Celsius)(high), July 2014", fontsize=24)
+    plt.xlabel('', fontsize=16)
+    fig.autofmt_xdate()
+    plt.ylabel('', fontsize=16)
+    plt.tick_params(axis='both', which='major', labelsize=16)
+
+    plt.show()
 
 
 
